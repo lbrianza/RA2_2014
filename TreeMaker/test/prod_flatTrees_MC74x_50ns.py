@@ -7,8 +7,8 @@ config.General.workArea = 'RSGraviton1000'
 config.section_('JobType')
 config.JobType.psetName = 'TreeMaker/test/runMakeTreeFromMiniAOD_cfg.py'
 config.JobType.pluginName = 'Analysis'
-config.JobType.pyCfgParams = ['global_tag=MCRUN2_74_V9::All', 'MC=True']
-config.JobType.inputFiles = ['PHYS14_25_V2_All_L1FastJet_AK8PFchs.txt','PHYS14_25_V2_All_L2Relative_AK8PFchs.txt','PHYS14_25_V2_All_L3Absolute_AK8PFchs.txt','PHYS14_25_V2_All_L1FastJet_AK4PFchs.txt','PHYS14_25_V2_All_L2Relative_AK4PFchs.txt','PHYS14_25_V2_All_L3Absolute_AK4PFchs.txt' ]
+config.JobType.pyCfgParams = ['global_tag=MCRUN2_74_V9A::All', 'MC=True']
+config.JobType.inputFiles = ['Summer15_50nsV5_MC_L2Relative_AK8PFchs.txt','Summer15_50nsV5_MC_L3Absolute_AK8PFchs.txt','Summer15_50nsV5_MC_L2L3Residual_AK8PFchs.txt','Summer15_50nsV5_MC_L2Relative_AK4PFchs.txt','Summer15_50nsV5_MC_L3Absolute_AK4PFchs.txt','Summer15_50nsV5_MC_L2L3Residual_AK4PFchs.txt' ]
 config.JobType.allowUndistributedCMSSW = True
 config.section_('Data')
 config.Data.inputDataset = '/RSGravToWWToLNQQ_kMpl01_M-1000_TuneCUETP8M1_13TeV-pythia8/RunIISpring15DR74-Asympt25ns_MCRUN2_74_V9-v1/MINIAODSIM'

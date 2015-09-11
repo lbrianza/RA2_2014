@@ -9,7 +9,7 @@ config.JobType.psetName = 'TreeMaker/test/runMakeTreeFromMiniAOD_cfg.py'
 config.JobType.pluginName = 'Analysis'
 config.JobType.pyCfgParams = ['global_tag=74X_dataRun2_Prompt_v1', 'MC=False', 'isCrab=True']
 config.JobType.allowUndistributedCMSSW = True
-config.JobType.inputFiles = ['PHYS14_25_V2_All_L1FastJet_AK8PFchs.txt','PHYS14_25_V2_All_L2Relative_AK8PFchs.txt','PHYS14_25_V2_All_L3Absolute_AK8PFchs.txt','PHYS14_25_V2_All_L1FastJet_AK4PFchs.txt','PHYS14_25_V2_All_L2Relative_AK4PFchs.txt','PHYS14_25_V2_All_L3Absolute_AK4PFchs.txt' ]
+config.JobType.inputFiles = ['Summer15_50nsV5_DATA_L2Relative_AK8PFchs.txt','Summer15_50nsV5_DATA_L3Absolute_AK8PFchs.txt','Summer15_50nsV5_DATA_L2L3Residual_AK8PFchs.txt','Summer15_50nsV5_DATA_L2Relative_AK4PFchs.txt','Summer15_50nsV5_DATA_L3Absolute_AK4PFchs.txt','Summer15_50nsV5_DATA_L2L3Residual_AK4PFchs.txt' ]
 config.section_('Data')
 config.Data.inputDataset = '/SingleMuon/Run2015B-PromptReco-v1/MINIAOD'
 config.Data.unitsPerJob = 50
