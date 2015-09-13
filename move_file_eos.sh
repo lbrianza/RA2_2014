@@ -69,3 +69,5 @@ mv data_mu_prompt/*/*/*/*/ReducedSelection_* data_mu_prompt/
 mv data_el_prompt/*/*/*/*/ReducedSelection_* data_el_prompt/
 mv data_mu_17jul/*/*/*/*/ReducedSelection_* data_mu_17jul/
 mv data_el_17jul/*/*/*/*/ReducedSelection_* data_el_17jul/
+mv data_mu_prompt_25ns_runC/*/*/*/*/ReducedSelection_* data_mu_prompt_25ns_runC/
+mv data_el_prompt_25ns_runC/*/*/*/*/ReducedSelection_* data_el_prompt_25ns_runC/
