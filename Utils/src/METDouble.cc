@@ -272,11 +272,11 @@ METDouble::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	  }
 	  //	  pat::MET pmet = pat::MET( &*(MET->at(0)) );
 
-	  //const float rawPt = MET->at(0).shiftedPt(pat::MET::NoShift, pat::MET::Raw);
-	  //const float rawPhi = MET->at(0).shiftedPhi(pat::MET::NoShift, pat::MET::Raw);
+	  const float rawPt = MET->at(0).shiftedPt(pat::MET::NoShift, pat::MET::Raw);
+	  const float rawPhi = MET->at(0).shiftedPhi(pat::MET::NoShift, pat::MET::Raw);
 	  //	  const float rawSumEt = MET->at(0).shiftedSumEt(pat::MET::NoShift, pat::MET::Raw);
-	  const float rawPt = MET->at(0).uncorPt();//met.shiftedPt(pat::MET::METUncertainty::NoShift, pat::MET::METUncertaintyLevel::Raw);
-	  const float rawPhi   = MET->at(0).uncorPhi();//met.shiftedPhi(pat::MET::METUncertainty::NoShift, pat::MET::METUncertaintyLevel::Raw);
+	  //	  const float rawPt = MET->at(0).uncorPt();//met.shiftedPt(pat::MET::METUncertainty::NoShift, pat::MET::METUncertaintyLevel::Raw);
+	  //const float rawPhi   = MET->at(0).uncorPhi();//met.shiftedPhi(pat::MET::METUncertainty::NoShift, pat::MET::METUncertaintyLevel::Raw);
 	  //	  const float rawSumEt = met.uncorSumEt();//met.shiftedSumEt(pat::MET::METUncertainty::NoShift, pat::MET::METUncertaintyLevel::Raw);
 
 	  TVector2 rawMET_;
