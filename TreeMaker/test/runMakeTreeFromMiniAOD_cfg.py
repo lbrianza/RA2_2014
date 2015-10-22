@@ -31,6 +31,7 @@ isHBHEEarlyData = parameters.value("isHBHEEarlyData",False)
 isHBHERun2015D=parameters.value("isHBHERun2015D",True)
 JsonFileName=parameters.value("jsonFileName","json/Cert_246908-251883_13TeV_PromptReco_Collisions15_JSON_v2.txt")
 IsCrab=parameters.value("isCrab",False)
+ReDoPruningAndSoftdrop=parameters.value("ReDoPruningAndSoftdrop",True)
 
 processName      = parameters.value("name","RSGraviton1000")
 
@@ -48,6 +49,7 @@ print "       debug : "+str(debug)
 print "       num of events : "+str(NumProcessedEvt)
 print "       doAK8Reclustering : "+str(DoAK8Reclustering)
 print "       doJECCorrection : "+str(DoJECCorrection)
+print "       ReDoPruningAndSoftdrop :"+str(ReDoPruningAndSoftdrop)
 print "       doPuppi : "+str(DoPuppi)
 print "       leptonFilter : "+str(LeptonFilter)
 print "       genJetsAK8Reclustering : "+str(GenJetsAK8Reclustering)
@@ -86,5 +88,6 @@ makeTreeTreeFromMiniAOD(process,
                 customizeHBHENoiseForEarlyData=isHBHEEarlyData,
                 customizeHBHENoiseForRun2015D=isHBHERun2015D,
                 jsonFileName=JsonFileName,
-                isCrab=IsCrab)
+                isCrab=IsCrab,
+                reDoPruningAndSoftdrop=ReDoPruningAndSoftdrop)
 
