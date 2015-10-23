@@ -421,34 +421,41 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		     float dRmin =  999. ;
 		     double softdropCorrection = 1.;
 		     double prunedCorrection = 1.;
+		     bool foundSoftdrop=false;
+		     bool foundPruned=false;
 
 		     if( softdropJets.isValid() && softdropJets->size()>0) {
 
 		       for (const pat::Jet &pj : *softdropJets) {
 			 jetSoftdrop.SetPtEtaPhiE( pj.pt(), pj.eta(), pj.phi(), pj.energy() );
 			 float dRtmp   = FatJet.DeltaR(jetSoftdrop);
-			 if( dRtmp < dRmin && dRtmp < 0.8 ){ dRmin = dRtmp; softdropjet = pj;}
+			 if( dRtmp < dRmin && dRtmp < 0.8 ){ dRmin = dRtmp; softdropjet = pj; foundSoftdrop=true; }
 			 else continue;
 		       }
 
-		       uncorrSoftdropJet= softdropjet.correctedP4(0);
+		       if (foundSoftdrop) {
+			 uncorrSoftdropJet= softdropjet.correctedP4(0);
 
-		       JetSoftdropCorrector->setJetEta(uncorrSoftdropJet.eta());
-		       JetSoftdropCorrector->setJetPt(uncorrSoftdropJet.pt());
-		       JetSoftdropCorrector->setJetA(softdropjet.jetArea());
-		       JetSoftdropCorrector->setRho(*(rho_.product())); 
+			 JetSoftdropCorrector->setJetEta(uncorrSoftdropJet.eta());
+			 JetSoftdropCorrector->setJetPt(uncorrSoftdropJet.pt());
+			 JetSoftdropCorrector->setJetA(softdropjet.jetArea());
+			 JetSoftdropCorrector->setRho(*(rho_.product())); 
 		       
-		       softdropCorrection = JetSoftdropCorrector->getCorrection();
+			 softdropCorrection = JetSoftdropCorrector->getCorrection();
 
-		       if (doJEC) 
-			 AK8softDropMass->push_back( softdropCorrection*uncorrSoftdropJet.mass());		       
-		       else 
-			 AK8softDropMass->push_back( 1.*uncorrSoftdropJet.mass());		       		     
+			 if (doJEC) 
+			   AK8softDropMass->push_back( softdropCorrection*uncorrSoftdropJet.mass());		       
+			 else 
+			   AK8softDropMass->push_back( 1.*uncorrSoftdropJet.mass());		       		     
+		       }
+		       else
+			 AK8softDropMass->push_back( -1.);		       		     
 		     }
 		     else
 			 AK8softDropMass->push_back( -1.);		       		     
 
 		     //		     FatJet.SetPtEtaPhiE( Jets->at(i).pt(), Jets->at(i).eta(), Jets->at(i).phi(), Jets->at(i).energy() ); 
+
 		     dRmin =  999. ;
 
 		     if( prunedJets.isValid() && prunedJets->size()>0) {
@@ -456,23 +463,27 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		       for (const pat::Jet &pj : *prunedJets) {
 			 jetPruned.SetPtEtaPhiE( pj.pt(), pj.eta(), pj.phi(), pj.energy() );
 			 float dRtmp   = FatJet.DeltaR(jetPruned);
-			 if( dRtmp < dRmin && dRtmp < 0.8 ){ dRmin = dRtmp; prunedjet = pj;}
+			 if( dRtmp < dRmin && dRtmp < 0.8 ){ dRmin = dRtmp; prunedjet = pj; foundPruned=true;}
 			 else continue;
 		       }
 
-		       uncorrPrunedJet= prunedjet.correctedP4(0);
+		       if (foundPruned) {
+			 uncorrPrunedJet= prunedjet.correctedP4(0);
 		       
-		       JetPrunedCorrector->setJetEta(uncorrPrunedJet.eta());
-		       JetPrunedCorrector->setJetPt(uncorrPrunedJet.pt());
-		       JetPrunedCorrector->setJetA(prunedjet.jetArea());
-		       JetPrunedCorrector->setRho(*(rho_.product())); 
+			 JetPrunedCorrector->setJetEta(uncorrPrunedJet.eta());
+			 JetPrunedCorrector->setJetPt(uncorrPrunedJet.pt());
+			 JetPrunedCorrector->setJetA(prunedjet.jetArea());
+			 JetPrunedCorrector->setRho(*(rho_.product())); 
 
-		       prunedCorrection = JetPrunedCorrector->getCorrection();
+			 prunedCorrection = JetPrunedCorrector->getCorrection();
 
-		       if (doJEC) 
-			 AK8prunedMass->push_back( prunedCorrection*uncorrPrunedJet.mass());
-		       else 
-			 AK8prunedMass->push_back( 1.*uncorrPrunedJet.mass());
+			 if (doJEC) 
+			   AK8prunedMass->push_back( prunedCorrection*uncorrPrunedJet.mass());
+			 else 
+			   AK8prunedMass->push_back( 1.*uncorrPrunedJet.mass());
+		       }
+		       else
+			 AK8prunedMass->push_back( -1.);		       		     
 		     }
 		     else
 			 AK8prunedMass->push_back( -1.);		       		     
