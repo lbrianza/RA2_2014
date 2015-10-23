@@ -327,10 +327,13 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		  if (doJEC) {
 		    correction = JetCorrector->getCorrection();
 		    massCorrection = JetMassCorrector->getCorrection();
-		    mass->push_back( correction*uncorrJet.mass());
+		    mass->push_back( massCorrection*uncorrJet.mass());
 		  }
 		  else
 		    mass->push_back( Jets->at(i).mass());
+		  
+		  //		  std::cout<<"DEBUG - AK8- raw pt: "<<uncorrJet.pt()<<" corr: "<<correction<<" corr pt: "<<correction*uncorrJet.pt()
+		  //			   <<" raw mass: "<<uncorrJet.mass()<<" massCorr: "<<massCorrection<<" corr mass: "<<massCorrection*uncorrJet.mass()<<std::endl;
 
 		  ijet++;
 	//	(Jets->at(i)).scaleEnergy(correction);
@@ -447,6 +450,10 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 			   AK8softDropMass->push_back( softdropCorrection*uncorrSoftdropJet.mass());		       
 			 else 
 			   AK8softDropMass->push_back( 1.*uncorrSoftdropJet.mass());		       		     
+
+			 //			 std::cout<<"DEBUG - SD- raw pt: "<<uncorrSoftdropJet.pt()
+			 // <<" raw mass: "<<uncorrSoftdropJet.mass()<<" massCorr: "<<softdropCorrection<<" corr mass: "
+			 //	  <<softdropCorrection*uncorrSoftdropJet.mass()<<std::endl;
 		       }
 		       else
 			 AK8softDropMass->push_back( -1.);		       		     
@@ -484,6 +491,11 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		       }
 		       else
 			 AK8prunedMass->push_back( -1.);		       		     
+
+		       //			 std::cout<<"DEBUG - PR- raw pt: "<<uncorrPrunedJet.pt()
+		       //  <<" raw mass: "<<uncorrPrunedJet.mass()<<" massCorr: "<<prunedCorrection<<" corr mass: "
+		       //	  <<softdropCorrection*uncorrPrunedJet.mass()<<std::endl;
+
 		     }
 		     else
 			 AK8prunedMass->push_back( -1.);		       		     
