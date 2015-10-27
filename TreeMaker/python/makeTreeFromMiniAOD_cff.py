@@ -806,8 +806,8 @@ reDoPruningAndSoftdrop=True
     	TreeName          = cms.string("PreSelection"),
     	VarsRecoCand = RecoCandVector,
     	#VarsRecoCand = cms.vstring('selectedIDIsoMuons','selectedIDIsoElectrons','IsolatedTracks','HTJets'),
-    	VarsDouble  	  = cms.vstring('WeightProducer:weight(Weight)','MHT','MET:Pt(METPt)','MET:Phi(METPhi)','MET:PtRaw(METPtRaw)','MET:PhiRaw(METPhiRaw)','MET:CaloMetPt(CaloMetPt)','MET:CaloMetPhi(CaloMetPhi)','HT','DeltaPhi:DeltaPhi1(DeltaPhi1)','DeltaPhi:DeltaPhi2(DeltaPhi2)','DeltaPhi:DeltaPhi3(DeltaPhi3)','GenEventInfo:genEventWeight(genEventWeight)'),
-    	VarsInt = cms.vstring('NJets','BTags','NVtx'),#,'Leptons'),
+    	VarsDouble  	  = cms.vstring('WeightProducer:weight(Weight)','MHT','MET:Pt(METPt)','MET:Phi(METPhi)','MET:PtRaw(METPtRaw)','MET:PhiRaw(METPhiRaw)','MET:CaloMetPt(CaloMetPt)','MET:CaloMetPhi(CaloMetPhi)','HT','DeltaPhi:DeltaPhi1(DeltaPhi1)','DeltaPhi:DeltaPhi2(DeltaPhi2)','DeltaPhi:DeltaPhi3(DeltaPhi3)','GenEventInfo:genEventWeight(genEventWeight)','GenEventInfo:PUWeight(PUWeight)'),
+        VarsInt = cms.vstring('NJets','BTags','NVtx','GenEventInfo:npT(npT)'),#,'Leptons'),
     #	VarsDoubleNamesInTree = cms.vstring('WeightProducer'),
         debug = debug,
     	)
