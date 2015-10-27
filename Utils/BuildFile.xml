@@ -15,6 +15,7 @@
 <use   name="RecoParticleFlow/PFProducer"/>
 <use   name="JetMETCorrections/Objects"/>
 <use   name="CondFormats/JetMETObjects"/>
+<use name="PhysicsTools/Utilities"/>
 
 <use name="root"/>
 <flags   EDM_PLUGIN="1"/>
