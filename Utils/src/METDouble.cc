@@ -192,7 +192,7 @@ METDouble::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	  bool skipEM_ = true;
 	  double skipEMfractionThreshold_ = 0.9;
 	  bool skipMuons_ = true;
-	  //	  double jetCorrEtaMax_ = 9.9;
+	  double jetCorrEtaMax_ = 9.9;
 	  double type1JetPtThreshold_ = 15.0;
 	  std::string skipMuonSelection_string = "isGlobalMuon | isStandAloneMuon";
 	  StringCutObjectSelector<reco::Candidate>* skipMuonSelection_ = new StringCutObjectSelector<reco::Candidate>(skipMuonSelection_string,true);
@@ -216,7 +216,10 @@ METDouble::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	      uncorrJet = ijet->p4();
 	    }
 	    
-	    JetCorrector->setJetEta(uncorrJet.eta());
+	    if (fabs(uncorrJet.eta()) < jetCorrEtaMax_)
+	      JetCorrector->setJetEta(uncorrJet.eta());
+	    else
+	      JetCorrector->setJetEta(TMath::Sign(1.,uncorrJet.eta())*jetCorrEtaMax_);
 	    JetCorrector->setJetPt(uncorrJet.pt());
 	    JetCorrector->setJetA(ijet->jetArea());
 	    JetCorrector->setRho(*(rho_.product())); 
@@ -228,7 +231,8 @@ METDouble::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	    
 	    reco::Candidate::LorentzVector rawJetP4 = jet.correctedP4(0);
 
-	    if ( skipMuons_ && jet.muonMultiplicity() != 0 ) {
+	    //	    if ( skipMuons_ && jet.muonMultiplicity() != 0 ) {
+	    if ( skipMuons_ ) {
 	      const std::vector<reco::CandidatePtr> & cands = jet.daughterPtrVector();
 	      for ( std::vector<reco::CandidatePtr>::const_iterator cand = cands.begin();
 		    cand != cands.end(); ++cand ) {
@@ -257,7 +261,10 @@ METDouble::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
 	    if ( corrJetP4.pt() > type1JetPtThreshold_) {
 	      reco::Candidate::LorentzVector tmpP4 = jet.correctedP4(0);
-	      JetCorrectorL1->setJetEta(tmpP4.eta());
+	      if (fabs(tmpP4.eta()) < jetCorrEtaMax_)
+		JetCorrectorL1->setJetEta(tmpP4.eta());
+	      else
+		JetCorrectorL1->setJetEta(TMath::Sign(1.,tmpP4.eta())*jetCorrEtaMax_);
 	      JetCorrectorL1->setJetPt(tmpP4.pt());
 	      JetCorrectorL1->setJetA(ijet->jetArea());
 	      JetCorrectorL1->setRho(*(rho_.product())); 

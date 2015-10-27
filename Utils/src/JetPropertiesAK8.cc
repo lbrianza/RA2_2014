@@ -275,7 +275,7 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	  vParMass.push_back(*L2L3JetPar);
 	
 	FactorizedJetCorrector *JetCorrector = new FactorizedJetCorrector(vPar);
-	FactorizedJetCorrector *JetMassCorrector = new FactorizedJetCorrector(vParMass);
+	//	FactorizedJetCorrector *JetMassCorrector = new FactorizedJetCorrector(vParMass);
 	FactorizedJetCorrector *JetPrunedCorrector = new FactorizedJetCorrector(vParMass);
 	FactorizedJetCorrector *JetSoftdropCorrector = new FactorizedJetCorrector(vParMass);
 
@@ -316,18 +316,20 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		  JetCorrector->setJetA(ijet->jetArea());
 		  JetCorrector->setRho(*(rho_.product())); 
 
+		  /*
 		  JetMassCorrector->setJetEta(uncorrJet.eta());
 		  JetMassCorrector->setJetPt(uncorrJet.pt());
 		  JetMassCorrector->setJetA(ijet->jetArea());
 		  JetMassCorrector->setRho(*(rho_.product())); 
+		  */
 
 		  double correction = 1.;
-		  double massCorrection = 1.;
+		  //		  double massCorrection = 1.;
 
 		  if (doJEC) {
 		    correction = JetCorrector->getCorrection();
-		    massCorrection = JetMassCorrector->getCorrection();
-		    mass->push_back( massCorrection*uncorrJet.mass());
+		    //		    massCorrection = JetMassCorrector->getCorrection();
+		    mass->push_back( correction*uncorrJet.mass());
 		  }
 		  else
 		    mass->push_back( Jets->at(i).mass());
@@ -369,8 +371,8 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		  AK8muonMultiplicity->push_back( Jets->at(i).muonMultiplicity() );
 
 
-		  AK8trimmedMass->push_back( massCorrection*Jets->at(i).userFloat("ak8PFJetsCHSTrimmedMass"));
-		  AK8filteredMass->push_back( massCorrection*Jets->at(i).userFloat("ak8PFJetsCHSFilteredMass"));
+		  AK8trimmedMass->push_back( correction*Jets->at(i).userFloat("ak8PFJetsCHSTrimmedMass"));
+		  AK8filteredMass->push_back( correction*Jets->at(i).userFloat("ak8PFJetsCHSFilteredMass"));
 
 		   /*double dR=1000.;
 		   double tempMass=0.;
@@ -505,14 +507,14 @@ JetPropertiesAK8::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		   }
 
 		   else {
-		     AK8prunedMass->push_back( massCorrection*Jets->at(i).userFloat("ak8PFJetsCHSPrunedMass"));
-		     AK8softDropMass->push_back( massCorrection*Jets->at(i).userFloat("ak8PFJetsCHSSoftDropMass"));
+		     AK8prunedMass->push_back( correction*Jets->at(i).userFloat("ak8PFJetsCHSPrunedMass"));
+		     AK8softDropMass->push_back( correction*Jets->at(i).userFloat("ak8PFJetsCHSSoftDropMass"));
 		   }
 
 		}
 	}
 	delete JetCorrector;
-	delete JetMassCorrector;
+	//	delete JetMassCorrector;
 	delete JetPrunedCorrector;
 	delete JetSoftdropCorrector;
 	delete L1JetPar;
