@@ -11,7 +11,7 @@ config.JobType.pyCfgParams = ['global_tag=76X_dataRun2_v15','leptonFilter=True',
 config.JobType.allowUndistributedCMSSW = True
 #config.JobType.maxMemoryMB = 2500    # 2.5 GB                      
 config.JobType.maxJobRuntimeMin = 900 #15 h
-config.JobType.inputFiles = ['Summer15_25nsV6_DATA_L1FastJet_AK8PFchs.txt','Summer15_25nsV6_DATA_L2Relative_AK8PFchs.txt','Summer15_25nsV6_DATA_L3Absolute_AK8PFchs.txt','Summer15_25nsV6_DATA_L2L3Residual_AK8PFchs.txt','Summer15_25nsV6_DATA_L1FastJet_AK4PFchs.txt','Summer15_25nsV6_DATA_L2Relative_AK4PFchs.txt','Summer15_25nsV6_DATA_L3Absolute_AK4PFchs.txt','Summer15_25nsV6_DATA_L2L3Residual_AK4PFchs.txt','Summer15_25nsV6_DATA_Uncertainty_AK4PFchs.txt','Summer15_25nsV6_DATA_Uncertainty_AK8PFchs.txt','Summer15_25nsV6_DATA_L1FastJet_AK8PFPuppi.txt','Summer15_25nsV6_DATA_L2Relative_AK8PFPuppi.txt','Summer15_25nsV6_DATA_L3Absolute_AK8PFPuppi.txt','Summer15_25nsV6_DATA_L2L3Residual_AK8PFPuppi.txt','Summer15_25nsV6_DATA_L1FastJet_AK4PFPuppi.txt','Summer15_25nsV6_DATA_L2Relative_AK4PFPuppi.txt','Summer15_25nsV6_DATA_L3Absolute_AK4PFPuppi.txt','Summer15_25nsV6_DATA_L2L3Residual_AK4PFPuppi.txt','Summer15_25nsV6_DATA_Uncertainty_AK4PFPuppi.txt','Summer15_25nsV6_DATA_Uncertainty_AK8PFPuppi.txt' ]
+config.JobType.inputFiles = ['Summer15_25nsV7_DATA_L1FastJet_AK8PFchs.txt','Summer15_25nsV7_DATA_L2Relative_AK8PFchs.txt','Summer15_25nsV7_DATA_L3Absolute_AK8PFchs.txt','Summer15_25nsV7_DATA_L2L3Residual_AK8PFchs.txt','Summer15_25nsV7_DATA_L1FastJet_AK4PFchs.txt','Summer15_25nsV7_DATA_L2Relative_AK4PFchs.txt','Summer15_25nsV7_DATA_L3Absolute_AK4PFchs.txt','Summer15_25nsV7_DATA_L2L3Residual_AK4PFchs.txt','Summer15_25nsV7_DATA_Uncertainty_AK4PFchs.txt','Summer15_25nsV7_DATA_Uncertainty_AK8PFchs.txt','Summer15_25nsV7_DATA_L1FastJet_AK8PFPuppi.txt','Summer15_25nsV7_DATA_L2Relative_AK8PFPuppi.txt','Summer15_25nsV7_DATA_L3Absolute_AK8PFPuppi.txt','Summer15_25nsV7_DATA_L2L3Residual_AK8PFPuppi.txt','Summer15_25nsV7_DATA_L1FastJet_AK4PFPuppi.txt','Summer15_25nsV7_DATA_L2Relative_AK4PFPuppi.txt','Summer15_25nsV7_DATA_L3Absolute_AK4PFPuppi.txt','Summer15_25nsV7_DATA_L2L3Residual_AK4PFPuppi.txt','Summer15_25nsV7_DATA_Uncertainty_AK4PFPuppi.txt','Summer15_25nsV7_DATA_Uncertainty_AK8PFPuppi.txt' ]
 config.section_('Data')
 config.Data.inputDataset = '/SingleMuon/Run2015B-PromptReco-v1/MINIAOD'
 config.Data.unitsPerJob = 10
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     from CRABAPI.RawCommand import crabCommand
 
     #Make sure you set this parameter (here or above in the config it does not matter)
-    config.General.workArea = 'data_10mag2016_jecV6_v1'
+    config.General.workArea = 'data_10mag2016_jecV7_v1'
 
     def submit(config):
         res = crabCommand('submit', config = config)
@@ -41,7 +41,7 @@ if __name__ == '__main__':
         
     config.General.requestName = 'data_mu_16dec_25ns_runD'
     config.Data.inputDataset = '/SingleMuon/Run2015D-16Dec2015-v1/MINIAOD'
-    config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/ecalMIBI/lbrianza/data_10mag2016_jecV6_v1/data_mu_16dec_25ns_runD/'
+    config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/ecalMIBI/lbrianza/data_10mag2016_jecV7_v1/data_mu_16dec_25ns_runD/'
     from multiprocessing import Process
     p = Process(target=submit, args=(config,))
     p.start()
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     
     config.General.requestName = 'data_el_16dec_25ns_runD'
     config.Data.inputDataset = '/SingleElectron/Run2015D-16Dec2015-v1/MINIAOD'
-    config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/ecalMIBI/lbrianza/data_10mag2016_jecV6_v1/data_el_16dec_25ns_runD/'
+    config.Data.outLFNDirBase = '/store/group/dpg_ecal/alca_ecalcalib/ecalMIBI/lbrianza/data_10mag2016_jecV7_v1/data_el_16dec_25ns_runD/'
     from multiprocessing import Process
     p = Process(target=submit, args=(config,))
     p.start()
