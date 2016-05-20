@@ -71,23 +71,23 @@ private:
   std::vector<std::string> VarsBoolNames_;
   std::vector<UChar_t> VarsBool_;
   
-  std::vector<edm::InputTag> VectorDoubleTags_;
+  std::vector<edm::EDGetTokenT<std::vector<double>>> VectorDoubleTags_;
   std::vector<std::string> VectorDoubleNames_;
   std::vector<std::vector<double> > VectorDoubleVector_;
   
-  std::vector<edm::InputTag> VectorIntTags_;
+  std::vector<edm::EDGetTokenT<std::vector<int>>> VectorIntTags_;
   std::vector<std::string> VectorIntNames_;
   std::vector<std::vector<int> > VectorIntVector_;
   
-  std::vector<edm::InputTag> VectorBoolTags_;
+  std::vector<edm::EDGetTokenT<std::vector<unsigned int>>> VectorBoolTags_;
   std::vector<std::string> VectorBoolNames_;
   std::vector<std::vector<unsigned int> > VectorBoolVector_;
   
-  std::vector<edm::InputTag> VectorStringTags_;
+  std::vector<edm::EDGetTokenT<std::vector<std::string>>> VectorStringTags_;
   std::vector<std::string> VectorStringNames_;
   std::vector<std::vector<std::string> > VectorStringVector_;
   
-  std::vector<edm::InputTag> VectorTLorentzVectorTags_;
+  std::vector<edm::EDGetTokenT<std::vector<TLorentzVector>>> VectorTLorentzVectorTags_;
   std::vector<std::string> VectorTLorentzVectorNames_;
   std::vector<std::vector<TLorentzVector> > VectorTLorentzVector_;
 

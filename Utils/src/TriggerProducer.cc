@@ -41,8 +41,8 @@ private:
   virtual void beginLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
   virtual void endLuminosityBlock(edm::LuminosityBlock&, edm::EventSetup const&);
   void GetInputTag(edm::InputTag& tag, std::string arg1, std::string arg2, std::string arg3, std::string arg1_default);
-  edm::InputTag trigResultsTag_;
-  edm::InputTag trigPrescalesTag_;
+  edm::EDGetTokenT<edm::TriggerResults> trigResultsTag_;
+  edm::EDGetTokenT<pat::PackedTriggerPrescales> trigPrescalesTag_;
   std::vector<std::string> parsedTrigNamesVec;
   // ----------member data ---------------------------
 };
@@ -55,9 +55,12 @@ private:
 //
 // constructors and destructor
 //
-TriggerProducer::TriggerProducer(const edm::ParameterSet& iConfig)
+TriggerProducer::TriggerProducer(const edm::ParameterSet& iConfig):
+  trigResultsTag_(consumes<edm::TriggerResults >(iConfig.getParameter<edm::InputTag>("trigTagArg1"))),
+  trigPrescalesTag_(consumes<pat::PackedTriggerPrescales >(iConfig.getParameter<edm::InputTag>("prescaleTagArg1")))
 {
   parsedTrigNamesVec = iConfig.getParameter <std::vector<std::string> > ("triggerNameList");
+  /*
   GetInputTag(trigResultsTag_,
 	      iConfig.getParameter <std::string> ("trigTagArg1"),
 	      iConfig.getParameter <std::string> ("trigTagArg2"),
@@ -68,8 +71,9 @@ TriggerProducer::TriggerProducer(const edm::ParameterSet& iConfig)
 	      iConfig.getParameter <std::string> ("prescaleTagArg2"),
 	      iConfig.getParameter <std::string> ("prescaleTagArg3"),
 	      "patTrigger");
+  */
   produces<std::vector<std::string> >("TriggerNames");
-  produces<std::vector<bool> >("TriggerPass");
+  produces<std::vector<unsigned int> >("TriggerPass");
   produces<std::vector<int> >("TriggerPrescales");
 }
 TriggerProducer::~TriggerProducer()
@@ -78,7 +82,7 @@ TriggerProducer::~TriggerProducer()
 // member functions
 //
 // ------------ helper function to make InputTags ------------
-void
+/*void
 TriggerProducer::GetInputTag(edm::InputTag& tag, std::string arg1, std::string arg2, std::string arg3, std::string arg1_default=""){
 // We we make the producer a little smarter. There are four cases we look at
 // 1) arg1 and arg3 are set, if this is the case we create the label bases on all three arguments
@@ -87,35 +91,36 @@ TriggerProducer::GetInputTag(edm::InputTag& tag, std::string arg1, std::string a
 // 4) arg1 is not set, but arg3 is set, we look for arg1_default in the process defined by arg3
   if(arg1.empty()) arg1 = arg1_default;
   if(arg3.empty()){
-    tag = edm::InputTag(arg1);
+    tag = consumes<edm::TriggerResults >(edm::InputTag(arg1));
   } else {
-    tag = edm::InputTag(arg1,arg2,arg3);
+    tag = edm::InputTag(consumes<edm::TriggerResults >(edm::InputTag(arg1)),consumes<edm::TriggerResults >(edm::InputTag(arg2)),consumes<edm::TriggerResults >(edm::InputTag(arg3)));
   }
 }
+*/
 // ------------ method called to produce the data ------------
 void
 TriggerProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-  std::auto_ptr<std::vector<bool> > passTrigVec(new std::vector<bool>());
+  std::auto_ptr<std::vector<unsigned int> > passTrigVec(new std::vector<unsigned int>());
   std::auto_ptr<std::vector<int> > trigPrescaleVec(new std::vector<int>());
   std::auto_ptr<std::vector<std::string> > trigNamesVec(new std::vector<std::string>());
   //int passesTrigger;
   edm::Handle<edm::TriggerResults> trigResults; //our trigger result object
-  iEvent.getByLabel(trigResultsTag_,trigResults);
+  iEvent.getByToken(trigResultsTag_,trigResults);
   const edm::TriggerNames& trigNames = iEvent.triggerNames(*trigResults);
   edm::Handle<pat::PackedTriggerPrescales> trigPrescales;
-  iEvent.getByLabel(trigPrescalesTag_,trigPrescales);
+  iEvent.getByToken(trigPrescalesTag_,trigPrescales);
   //Find the matching triggers
   std::string testTriggerName;
   for(unsigned int trigIndex = 0; trigIndex < trigNames.size(); trigIndex++){
     testTriggerName = trigNames.triggerName(trigIndex);
-    //    std::cout<<testTriggerName<<std::endl;
+    std::cout<<testTriggerName<<std::endl;
     for(unsigned int parsedIndex = 0; parsedIndex < parsedTrigNamesVec.size(); parsedIndex++){
       if(testTriggerName.find(parsedTrigNamesVec.at(parsedIndex)) != std::string::npos){
 	trigNamesVec->push_back(testTriggerName.c_str());
 	passTrigVec->push_back(trigResults->accept(trigIndex));
 	trigPrescaleVec->push_back(trigPrescales->getPrescaleForIndex(trigIndex));
-	//	std::cout << "Matched: " << testTriggerName << std::endl;
+	std::cout << "Matched: " << testTriggerName << " pass: "<<trigResults->accept(trigIndex)<<std::endl;
 	//break; //We only match one trigger to each trigger name fragment passed
       }
     }

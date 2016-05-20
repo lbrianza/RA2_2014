@@ -226,6 +226,90 @@ TreeMaker::TreeMaker(const edm::ParameterSet& iConfig)
 
   }  
 
+  // vectors
+  for(unsigned int i=0; i< VectorIntNames_.size();i++)
+  {
+    std::vector<int> vector;
+    VectorIntVector_.push_back(vector);
+    std::string tempFull = VectorIntNames_[i];
+    std::string nameInTree = VectorIntNames_[i];
+    std::string tag = VectorIntNames_[i];
+    if(tempFull.find("(") <tempFull.size() && tempFull.find(")") <tempFull.size())
+    {
+      tag = SeparateString(tempFull,"(").first;
+      nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
+    }
+    std::cout<<"VectorIntNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
+    VectorIntTags_.push_back(consumes<std::vector<int> >(edm::InputTag(tag)));
+  }
+
+  for(unsigned int i=0; i< VectorBoolNames_.size();i++)
+  {
+    std::vector<unsigned int> vector;
+    VectorBoolVector_.push_back(vector);
+    std::string tempFull = VectorBoolNames_[i];
+    std::string nameInTree = VectorBoolNames_[i];
+    std::string tag = VectorBoolNames_[i];
+    if(tempFull.find("(") <tempFull.size() && tempFull.find(")") <tempFull.size())
+    {
+      tag = SeparateString(tempFull,"(").first;
+      nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
+    }
+    std::cout<<"VectorIntNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
+    VectorBoolTags_.push_back(consumes<std::vector<unsigned int> >(edm::InputTag(tag)));
+  }
+
+
+  for(unsigned int i=0; i< VectorDoubleNames_.size();i++)
+  {
+    std::vector<double> vector;
+    VectorDoubleVector_.push_back(vector);
+    std::string tempFull = VectorDoubleNames_[i];
+    std::string nameInTree = VectorDoubleNames_[i];
+    std::string tag = VectorDoubleNames_[i];
+    if(tempFull.find("(") <tempFull.size() && tempFull.find(")") <tempFull.size())
+    {
+      tag = SeparateString(tempFull,"(").first;
+      nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
+    }
+    std::cout<<"VectorIntNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
+    VectorDoubleTags_.push_back(consumes<std::vector<double> >(edm::InputTag(tag)));
+  }
+
+
+  for(unsigned int i=0; i< VectorStringNames_.size();i++)
+  {
+    std::vector<std::string> vector;
+    VectorStringVector_.push_back(vector);
+    std::string tempFull = VectorStringNames_[i];
+    std::string nameInTree = VectorStringNames_[i];
+    std::string tag = VectorStringNames_[i];
+    if(tempFull.find("(") <tempFull.size() && tempFull.find(")") <tempFull.size())
+    {
+      tag = SeparateString(tempFull,"(").first;
+      nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
+    }
+    std::cout<<"VectorIntNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
+    VectorStringTags_.push_back(consumes<std::vector<std::string> >(edm::InputTag(tag)));
+  }
+
+  for(unsigned int i=0; i< VectorTLorentzVectorNames_.size();i++)
+  {
+    std::vector<TLorentzVector> vector;
+    VectorTLorentzVector_.push_back(vector);
+    std::string tempFull = VectorTLorentzVectorNames_[i];
+    std::string nameInTree = VectorTLorentzVectorNames_[i];
+    std::string tag = VectorTLorentzVectorNames_[i];
+    if(tempFull.find("(") <tempFull.size() && tempFull.find(")") <tempFull.size())
+    {
+      tag = SeparateString(tempFull,"(").first;
+      nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
+    }
+    std::cout<<"VectorIntNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
+    VectorTLorentzVectorTags_.push_back(consumes<std::vector<TLorentzVector> >(edm::InputTag(tag)));
+  }
+
+
 }
 
 
@@ -373,62 +457,62 @@ TreeMaker::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   if(debug_) std::cout<<"Point g"<<std::endl;
   for(unsigned int i = 0; i < VectorDoubleTags_.size(); ++i) {
     edm::Handle<std::vector<double> > var;
-    iEvent.getByLabel(VectorDoubleTags_.at(i),var);
+    iEvent.getByToken(VectorDoubleTags_.at(i),var);
     if( var.isValid() ){
       for(unsigned int j=0; j< var->size(); j++){
 	VectorDoubleVector_.at(i).push_back(var->at(j));
       }
     }else{
-      std::cout<<"WARNING ... "<<i<<"th double variable : "<<VectorDoubleTags_[i].label()<<" is NOT valid?!"<<std::endl;
+      std::cout<<"WARNING ... "<<i<<"th double variable : "<<" is NOT valid?!"<<std::endl;
     }
   }
   if(debug_) std::cout<<"Point h"<<std::endl;
   for(unsigned int i = 0; i < VectorIntTags_.size(); ++i) {
     edm::Handle<std::vector<int> > var;
-    iEvent.getByLabel(VectorIntTags_.at(i),var);
+    iEvent.getByToken(VectorIntTags_.at(i),var);
     if( var.isValid() ){
       for(unsigned int j=0; j< var->size(); j++){
 	VectorIntVector_.at(i).push_back(var->at(j));
       }
     }else{
-      std::cout<<"WARNING ... "<<i<<"th int variable : "<<VectorIntTags_[i].label()<<" is NOT valid?!"<<std::endl;
+      std::cout<<"WARNING ... "<<i<<"th int variable : "<<" is NOT valid?!"<<std::endl;
     }
   }
   if(debug_) std::cout<<"Point i"<<std::endl;
   for(unsigned int i = 0; i < VectorBoolTags_.size(); ++i) {
-    edm::Handle<std::vector<bool> > var;
-    iEvent.getByLabel(VectorBoolTags_.at(i),var);
+    edm::Handle<std::vector<unsigned int> > var;
+    iEvent.getByToken(VectorBoolTags_.at(i),var);
     if( var.isValid() ){
       for(unsigned int j=0; j< var->size(); j++){
 	if( var->at(j) ) VectorBoolVector_.at(i).push_back(1);
 	else VectorBoolVector_.at(i).push_back(0);
       }
     }else{
-      std::cout<<"WARNING ... "<<i<<"th bool variable : "<<VectorBoolTags_[i].label()<<" is NOT valid?!"<<std::endl;
+      std::cout<<"WARNING ... "<<i<<"th bool variable : "<<" is NOT valid?!"<<std::endl;
     }
   }
   if(debug_) std::cout<<"Point j"<<std::endl;
   for(unsigned int i = 0; i < VectorStringTags_.size(); ++i) {
     edm::Handle<std::vector<std::string> > var;
-    iEvent.getByLabel(VectorStringTags_.at(i),var);
+    iEvent.getByToken(VectorStringTags_.at(i),var);
     if( var.isValid() ){
       for(unsigned int j=0; j< var->size(); j++){
 	VectorStringVector_.at(i).push_back(var->at(j));
       }
     }else{
-      std::cout<<"WARNING ... "<<i<<"th variable : "<<VectorStringTags_[i].label()<<" is NOT valid?!"<<std::endl;
+      std::cout<<"WARNING ... "<<i<<"th variable : "<<" is NOT valid?!"<<std::endl;
     }
   }
   if(debug_) std::cout<<"Point k"<<std::endl;
   for(unsigned int i = 0; i < VectorTLorentzVectorTags_.size(); ++i) {
     edm::Handle<std::vector<TLorentzVector> > var;
-    iEvent.getByLabel(VectorTLorentzVectorTags_.at(i),var);
+    iEvent.getByToken(VectorTLorentzVectorTags_.at(i),var);
     if( var.isValid() ) {
       for(unsigned int j=0; j< var->size();j++){
 	VectorTLorentzVector_.at(i).push_back(var->at(j));
       }
     }else{
-      std::cout<<"WARNING ... "<<i<<"th variable : "<<VectorTLorentzVectorTags_[i].label()<<" is NOT valid?!"<<std::endl;
+      std::cout<<"WARNING ... "<<i<<"th variable : "<<" is NOT valid?!"<<std::endl;
     }
   }
   if(debug_) std::cout<<"filling tree "<<std::endl;
@@ -663,7 +747,6 @@ TreeMaker::beginJob()
       nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
     }
     std::cout<<"VectorIntNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
-    VectorIntTags_.push_back(edm::InputTag(tag));
     nameInTree.erase (std::remove (nameInTree.begin(), nameInTree.end(), ':'), nameInTree.end());
     tree_->Branch((TString)nameInTree, "std::vector<int>", &(VectorIntVector_.at(i)), 32000, 0);
   }
@@ -680,7 +763,6 @@ TreeMaker::beginJob()
       nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
     }
     std::cout<<"VectorDoubleNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
-    VectorDoubleTags_.push_back(edm::InputTag(tag));
     nameInTree.erase (std::remove (nameInTree.begin(), nameInTree.end(), ':'), nameInTree.end());
     tree_->Branch((TString)nameInTree, "std::vector<double>", &(VectorDoubleVector_.at(i)), 32000, 0);
   }
@@ -697,7 +779,6 @@ TreeMaker::beginJob()
       nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
     }
     std::cout<<"VectorBoolNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
-    VectorBoolTags_.push_back(edm::InputTag(tag));
     nameInTree.erase (std::remove (nameInTree.begin(), nameInTree.end(), ':'), nameInTree.end());
     tree_->Branch((TString)nameInTree, "std::vector<unsigned int>", &(VectorBoolVector_.at(i)), 32000, 0);
   }
@@ -714,7 +795,6 @@ TreeMaker::beginJob()
       nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
     }
     std::cout<<"VectorStringNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
-    VectorStringTags_.push_back(edm::InputTag(tag));
     nameInTree.erase (std::remove (nameInTree.begin(), nameInTree.end(), ':'), nameInTree.end());
     tree_->Branch((TString)nameInTree, "std::vector<std::string>", &(VectorStringVector_.at(i)), 32000, 0);
   }
@@ -731,7 +811,6 @@ TreeMaker::beginJob()
       nameInTree = SeparateString(SeparateString(tempFull,"(").second,")").first;
     }
     std::cout<<"VectorTLorentzVectorNames_: tag:"<<tag<<" nameInTree: "<<nameInTree<<" originial full name: "<<tempFull<<std::endl;
-    VectorTLorentzVectorTags_.push_back(edm::InputTag(tag));
     nameInTree.erase (std::remove (nameInTree.begin(), nameInTree.end(), ':'), nameInTree.end());
     tree_->Branch((TString)nameInTree, "std::vector<TLorentzVector>", &(VectorTLorentzVector_.at(i)), 32000, 0);
   }

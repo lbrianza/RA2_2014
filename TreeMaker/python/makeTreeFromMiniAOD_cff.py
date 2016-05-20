@@ -82,7 +82,7 @@ reDoPruningAndSoftdropPuppi=True
 # any matching trigger will be included (default behavior)
     from AllHadronicSUSY.Utils.triggerproducer_cfi import triggerProducer
     process.TriggerProducer = triggerProducer.clone( 
-        trigTagArg1 = cms.string('TriggerResults'),
+        trigTagArg1 = cms.string('TriggerResults::HLT'),
         trigTagArg2 = cms.string(''),
         trigTagArg3 = cms.string('HLT'),
         prescaleTagArg1 = cms.string('patTrigger'),
@@ -1434,7 +1434,7 @@ reDoPruningAndSoftdropPuppi=True
     process.dump = cms.EDAnalyzer("EventContentAnalyzer")
     process.WriteTree = cms.Path(
 #        process.HLTSelection*
-##        process.TriggerProducer* #NOT PRESENT IN 76x MINIAOD
+        process.TriggerProducer* #NOT PRESENT IN 76x MINIAOD
         ### MET Filter Bits
         process.HBHENoiseFilterResultProducer*
 #        process.FilterProducer* #this now contains all the met filters
