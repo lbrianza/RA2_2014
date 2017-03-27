@@ -7,18 +7,18 @@ config.General.workArea = 'data_mu'
 config.section_('JobType')
 config.JobType.psetName = 'TreeMaker/test/runMakeTreeFromMiniAOD_cfg.py'
 config.JobType.pluginName = 'Analysis'
-config.JobType.pyCfgParams = ['global_tag=80X_dataRun2_v6','leptonFilter=True', 'MC=False', 'isCrab=True', 'DoJECCorrection=True', 'isHBHERun2015D=False', 'DoPuppi=True','ReDoPruningAndSoftdropPuppi=True']
+config.JobType.pyCfgParams = ['global_tag=80X_dataRun2_v6','leptonFilter=True', 'MC=False', 'isCrab=True', 'DoJECCorrection=True', 'DoPuppi=True','ReDoPruningAndSoftdropPuppi=True']
 config.JobType.allowUndistributedCMSSW = True
 #config.JobType.maxMemoryMB = 2500    # 2.5 GB                      
 config.JobType.maxJobRuntimeMin = 900 #15 h
 config.JobType.inputFiles = ['Summer15_25nsV6_DATA_L1FastJet_AK8PFchs.txt','Summer15_25nsV6_DATA_L2Relative_AK8PFchs.txt','Summer15_25nsV6_DATA_L3Absolute_AK8PFchs.txt','Summer15_25nsV6_DATA_L2L3Residual_AK8PFchs.txt','Summer15_25nsV6_DATA_L1FastJet_AK4PFchs.txt','Summer15_25nsV6_DATA_L2Relative_AK4PFchs.txt','Summer15_25nsV6_DATA_L3Absolute_AK4PFchs.txt','Summer15_25nsV6_DATA_L2L3Residual_AK4PFchs.txt','Summer15_25nsV6_DATA_Uncertainty_AK4PFchs.txt','Summer15_25nsV6_DATA_Uncertainty_AK8PFchs.txt','Summer15_25nsV6_DATA_L1FastJet_AK8PFPuppi.txt','Summer15_25nsV6_DATA_L2Relative_AK8PFPuppi.txt','Summer15_25nsV6_DATA_L3Absolute_AK8PFPuppi.txt','Summer15_25nsV6_DATA_L2L3Residual_AK8PFPuppi.txt','Summer15_25nsV6_DATA_L1FastJet_AK4PFPuppi.txt','Summer15_25nsV6_DATA_L2Relative_AK4PFPuppi.txt','Summer15_25nsV6_DATA_L3Absolute_AK4PFPuppi.txt','Summer15_25nsV6_DATA_L2L3Residual_AK4PFPuppi.txt','Summer15_25nsV6_DATA_Uncertainty_AK4PFPuppi.txt','Summer15_25nsV6_DATA_Uncertainty_AK8PFPuppi.txt' ] #TO BE UPDATED
 config.section_('Data')
-config.Data.inputDataset = '/SingleMuon/Run2015B-PromptReco-v1/MINIAOD'
+config.Data.inputDataset = '/SingleMuon/Run2016B-PromptReco-v1/MINIAOD'
 config.Data.unitsPerJob = 10
 #config.Data.lumiMask = 'json/Cert_246908-259891_13TeV_PromptReco_Collisions15_25ns_JSON.txt' #last version (1.56/fb)
 #config.Data.lumiMask = 'json/Cert_246908-258750_13TeV_PromptReco_Collisions15_25ns_JSON.txt' #for the AN (1.26/fb)
 #config.Data.lumiMask = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Cert_246908-260627_13TeV_PromptReco_Collisions15_25ns_JSON_Silver.txt' #final SILVER (2.5/fb)
-config.Data.lumiMask = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Reprocessing/Cert_13TeV_16Dec2015ReReco_Collisions15_25ns_JSON_v2.txt' #final GOLDEN (2.1/fb)
+config.Data.lumiMask = '/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions15/13TeV/Reprocessing/Cert_13TeV_16Dec2016ReReco_Collisions15_25ns_JSON_v2.txt' #final GOLDEN (2.1/fb)
 #config.Data.lumiMask = 'json/Cert_246908-259891_13TeV_PromptReco_Collisions15_25ns_JSON_Silver.txt' # 1.9/fb
 config.Data.inputDBS = 'global' #'http://cmsdbsprod.cern.ch/cms_dbs_prod_global/servlet/DBSServlet'
 config.Data.splitting = 'LumiBased'

@@ -32,15 +32,14 @@ GenJetsAK8Reclustering=parameters.value("genJetsAK8Reclustering",True)
 GenJetsAK10Reclustering=parameters.value("genJetsAK10Reclustering",False)
 GenJetsAK12Reclustering=parameters.value("genJetsAK12Reclustering",False)
 isHBHEEarlyData = parameters.value("isHBHEEarlyData",False)
-isHBHERun2015D=parameters.value("isHBHERun2015D",True)
-JsonFileName=parameters.value("jsonFileName","/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/Cert_271036-274240_13TeV_PromptReco_Collisions16_JSON.txt")
+JsonFileName=parameters.value("jsonFileName","json/Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.txt")
 IsCrab=parameters.value("isCrab",False)
 ReDoPruningAndSoftdrop=parameters.value("ReDoPruningAndSoftdrop",False)
 ReDoPruningAndSoftdropPuppi=parameters.value("ReDoPruningAndSoftdropPuppi",True)
-#IsRun2016BCD=parameters.Value("IsRun2016BCD",False)
-#IsRun2016E=parameters.Value("IsRun2016E",False)
-#IsRun2016F=parameters.Value("IsRun2016F",False)
-#IsRun2016GH=parameters.Value("IsRun2016GH",False)
+IsRun2016BCD=parameters.value("IsRun2016BCD",False)
+IsRun2016EF=parameters.value("IsRun2016EF",False)
+IsRun2016G=parameters.value("IsRun2016G",False)
+IsRun2016H=parameters.value("IsRun2016H",False)
 
 processName      = parameters.value("name","RSGraviton1000")
 
@@ -68,12 +67,11 @@ print "       genJetsAK8Reclustering : "+str(GenJetsAK8Reclustering)
 print "       genJetsAK10Reclustering : "+str(GenJetsAK10Reclustering)
 print "       genJetsAK12Reclustering : "+str(GenJetsAK12Reclustering)
 print "       isHBHEEarlyData : "+str(isHBHEEarlyData)
-print "       isHBHERun2015D : "+str(isHBHERun2015D)
 print "       jsonFileName : "+str(JsonFileName)
-#print "       isRun2016BCD : "+str(IsRun2016BCD)
-#print "       isRun2016E : "+str(IsRun2016E)
-#print "       isRun2016F : "+str(IsRun2016F)
-#print "       isRun2016GH : "+str(IsRun2016GH)
+print "       isRun2016BCD : "+str(IsRun2016BCD)
+print "       isRun2016EF : "+str(IsRun2016EF)
+print "       isRun2016G : "+str(IsRun2016G)
+print "       isRun2016H : "+str(IsRun2016H)
 print "       isCrab : "+str(False)
 print "************************************************"
 
@@ -89,7 +87,7 @@ makeTreeTreeFromMiniAOD(process,
                 NJetsMin=nJetsMin,
                 HTMin=htMin,
                 MHTMin=mhtMin,
-                reportEveryEvt=1000,
+                reportEveryEvt=1,
                 testFileName=dataSetName,
 		Global_Tag=global_tag,
                 METFiltersProcess=METFiltersProcess,
@@ -108,14 +106,12 @@ makeTreeTreeFromMiniAOD(process,
                 genJetsAK10Reclustering=GenJetsAK10Reclustering,
                 genJetsAK12Reclustering=GenJetsAK12Reclustering,
                 customizeHBHENoiseForEarlyData=isHBHEEarlyData,
-                customizeHBHENoiseForRun2015D=isHBHERun2015D,
                 jsonFileName=JsonFileName,
                 isCrab=IsCrab,
                 reDoPruningAndSoftdrop=ReDoPruningAndSoftdrop,
-                reDoPruningAndSoftdropPuppi=ReDoPruningAndSoftdropPuppi
-#                isRun2016BCD=IsRun2016BCD,
-#                isRun2016E=IsRun2016E,
-#                isRun2016F=IsRun2016F,
-#                isRun2016GH=IsRun2016GH
+                reDoPruningAndSoftdropPuppi=ReDoPruningAndSoftdropPuppi,
+                isRun2016BCD=IsRun2016BCD,
+                isRun2016EF=IsRun2016EF,
+                isRun2016G=IsRun2016G,
+                isRun2016H=IsRun2016H
                 )
-
